@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='DistilTag',
@@ -6,6 +6,7 @@ setup(
     author="NTUGIL LOPE Lab",
     url="https://github.com/lopentu/DistilTag",
     packages=['distiltag'],
+    setup_requires=["wheel"],
     install_requires=["gdown", "torch", "transformers", "numpy"],
     license='GNU GPLv3',
     long_description=open('README.md').read()
