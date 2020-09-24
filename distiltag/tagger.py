@@ -2,11 +2,16 @@ import os
 import re
 import torch
 import numpy as np
-from transformers import DistilBertTokenizer, DistilBertModel
+from .download import get_model_path
+from transformers import DistilBertTokenizer
 from transformers import DistilBertForTokenClassification
 
 class DistilTag:
-    def __init__(self, model_path, use_cuda=False):        
+    def __init__(self, model_path=None, use_cuda=False):
+        if not model_path:
+            model_path = get_model_path()
+        if not os.path.exists(model_path):
+            raise FileNotFoundError("Cannot find model under " + model_path)
         self.device = "cuda" if use_cuda and torch.cuda.is_available() else "cpu"
         self.model = DistilBertForTokenClassification.from_pretrained(model_path)
         self.model.to(self.device)
