@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='DistilTag',
-    version='0.2.1',
+    version='0.2.2',
     author="NTUGIL LOPE Lab",
     url="https://github.com/lopentu/DistilTag",
     packages=['DistilTag'],

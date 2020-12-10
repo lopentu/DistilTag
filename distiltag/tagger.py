@@ -6,6 +6,9 @@ from .download import get_model_path
 from transformers import DistilBertTokenizerFast
 from transformers import DistilBertForTokenClassification
 
+HALF2FULL = dict((i, i + 0xFEE0) for i in range(0x21, 0x7F))
+HALF2FULL[0x20] = 0x3000
+
 class DistilTag:
     def __init__(self, model_path=None, use_cuda=False):
         if not model_path:
@@ -57,6 +60,7 @@ class DistilTag:
         return tagged
 
     def tag(self, text):
+        text = text.translate(HALF2FULL)
         label_map = self.label_map
         sentences = self.make_sentences(text)
         tokenizer = self.tokenizer
